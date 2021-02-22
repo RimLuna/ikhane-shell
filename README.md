@@ -1,1 +1,2 @@
-# ikhane-shell
+# IKHANE SHELL
+Because this project is bullshit.
