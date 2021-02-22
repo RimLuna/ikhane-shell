@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define BUFFER_SIZE 1024
 # define PROMPT "$ "
 
 extern char **environ;

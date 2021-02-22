@@ -11,15 +11,38 @@ print_prompt ()
 }
 
 int
+ikhane_shell(ac, av, envp)
+int		ac;
+char	**av;
+char	**envp;
+{
+	int		status;
+	char	**cmds;
+	char	*line;
+
+	status = 1;
+	while (status)
+	{
+		print_prompt();
+		line = _readline();
+		cmds = _strtok(line, ";");
+		free(cmds);
+		free(line);
+	}
+	return (status);
+}
+
+int
 main (ac, av, envp)
 int		ac;
 char	**av;
 char	**envp;
 {
-	char	*env;
+	return (ikhane_shell(ac, av, envp));
 
-	env = _getenv("TERM_PROGRAM");
-	_puts(env);
-	// return (minishell(env));
+	// env = _getenv("PATH");
+	// _puts(env);
+	// _puts(envp[0]);
+
 	(void)ac;
 }
