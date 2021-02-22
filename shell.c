@@ -1,20 +1,30 @@
 #include "shell.h"
 
-void
-print_prompt ()
+char *
+_getenv(name)
+const char *name;
 {
-	_puts("\e[1m\e[38;5;14m[");
-	_puts("\e[38;5;205m");
-	_puts("ikhane shell");
-	_puts("\e[38;5;14m] ");
-	_puts("\e[38;5;226m$ \e[0m");
-}
+	const char	*np;
+	char		**p;
+	char		*c;
+	int			len;
+	int			*offset;
 
-int
-main (ac, av, envp)
-int		ac;
-char	**av;
-char	**envp;
-{
-	print_prompt();
+	if (name== '\0')
+		return (NULL);
+	np = name;
+	while (*np && *np != '=')
+		np++;
+	len = np - name;
+	p = environ;
+	while ((c = *p) != NULL)
+	{
+		if (_strncmp(c, name, len) == 0 && c[len] == '=')
+		{
+			offset = p - environ;
+			return (c + len + 1);
+		}
+		p++;
+	}
+	return (NULL);
 }
