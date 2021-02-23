@@ -43,6 +43,8 @@ char	**env;
 	int		status;
 
 	i = 0;
+	// if (!_strcmp(cmd[0], ""))
+	// 	return (1);
 	while (cmd[i])
 	{
 		args = _strtok(cmd[i], " \n\t\r\"");

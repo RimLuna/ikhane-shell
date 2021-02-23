@@ -1,6 +1,46 @@
 #include "shell.h"
 
 char **
+choldpwd(env, newdir)
+char **env;
+char *newdir;
+{
+	int		i;
+
+	i = 0;
+	// _puts("inside\n");
+	while (env[i])
+	{
+		// _puts(env[i] + 7);
+		// _puts("\n");
+		if (!_strcmp(env[i] + 7, _getenv("OLDPWD")))
+			_strcpy(env[i] + 7, newdir);
+		i++;
+	}
+	return (env);
+}
+
+char **
+chpwd(env, pwd)
+char **env;
+char *pwd;
+{
+	int		i;
+
+	i = 0;
+	// _puts("inside\n");
+	while (env[i])
+	{
+		// _puts(env[i] + 7);
+		// _puts("\n");
+		if (!_strcmp(env[i] + 4, _getenv("PWD")))
+			_strcpy(env[i] + 4, pwd);
+		i++;
+	}
+	return (env);
+}
+
+char **
 _unset(args, env)
 char **args;
 char **env;
@@ -33,12 +73,41 @@ char **args;
 char **env;
 {
 	int		i;
+	char	*path;
+	char	*oldpwd;
 
 	i = 0;
+	
+	// ((!_strcmp(args[1], "-")) && (path = _getenv("OLDPWD"))) ? chdir(path) : _puts("cd: OLDPWD not set\n");
+	oldpwd = _getenv("PWD");
 	if (!args[1] || !_strcmp(args[1], "~"))
-		chdir("/Users/rbougssi");
+	{
+		if ((path = _getenv("HOME")))
+		{
+			env = choldpwd(env, oldpwd);
+			chdir(path);
+			env = chpwd(env, path);
+		}
+		else
+			_puts("cd: HOME not set\n");
+	}
+	else if (!_strcmp(args[1], "-"))
+	{
+		if ((_strcmp(path = _getenv("OLDPWD"), "")))
+		{
+			chdir(path);
+			env = choldpwd(env, path);
+			env = chpwd(env, oldpwd);
+		}
+		else
+			_puts("cd: OLDPWD not set\n");
+	}
 	else
+	{
+		env = choldpwd(env, oldpwd);
 		chdir(args[1]);
+		env = chpwd(env, args[1]);
+	}
 	return (env);
 }
 
