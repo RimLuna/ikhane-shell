@@ -96,8 +96,10 @@ char **env;
 		if ((_strcmp(path = _getenv("OLDPWD"), "")))
 		{
 			chdir(path);
-			env = choldpwd(env, path);
-			env = chpwd(env, oldpwd);
+			env = choldpwd(env, oldpwd);
+			env = chpwd(env, path);
+			_puts(path);
+			_puts("\n");
 		}
 		else
 			_puts("cd: OLDPWD not set\n");
