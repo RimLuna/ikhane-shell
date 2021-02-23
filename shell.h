@@ -10,6 +10,9 @@
 
 extern char **environ;
 
+int
+is_option(char *s, char c);
+
 void
 print_prompt();
 

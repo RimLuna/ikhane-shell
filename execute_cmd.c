@@ -27,7 +27,7 @@ char	**env;
 	while (i < 9)
 	{
 		if (_strcmp(args[0], builtins[i++]) == 0)
-			return ((*builtin_fnc(6))(args, env));
+			return ((*builtin_fnc(3))(args, env));
 	}
 	return (env);
 }

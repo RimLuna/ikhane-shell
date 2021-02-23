@@ -12,7 +12,7 @@ char **
 
 char	**_pwd(char **args, char **env);
 
-// _echo();
+char	**_echo(char **args, char **env);
 
 // _set();
 

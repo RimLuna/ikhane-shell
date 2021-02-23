@@ -1,6 +1,21 @@
 #include "shell.h"
 
 char **
+_echo(args, env)
+char **args;
+char **env;
+{
+	int		allow_options;
+
+	allow_options = !!(args[1] && !!is_option(args[1], 'n'));
+	if (allow_options)
+		_puts("OPTION\n");
+	else
+		_puts("NO OPTION\n");
+	return (env);	
+}
+
+char **
 _pwd(args, env)
 char **args;
 char **env;
@@ -40,7 +55,7 @@ char **
 	// builtin_fnc[0] = &_alias;
 	// builtin_fnc[1] = &_cd;
 	builtin_fnc[2] = &_pwd;
-	// builtin_fnc[3] = &_echo;
+	builtin_fnc[3] = &_echo;
 	// builtin_fnc[4] = &_set;
 	// builtin_fnc[5] = &_unset;
 	builtin_fnc[6] = &_exit2;
