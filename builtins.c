@@ -1,6 +1,48 @@
 #include "shell.h"
 
 char **
+_unset(args, env)
+char **args;
+char **env;
+{
+	return (env);
+	(void)args;
+}
+
+char **
+_export(args, env)
+char **args;
+char **env;
+{
+	return (env);
+	(void)args;
+}
+
+char **
+_dot(args, env)
+char **args;
+char **env;
+{
+	return (env);
+	(void)args;
+}
+
+char **
+_cd(args, env)
+char **args;
+char **env;
+{
+	int		i;
+
+	i = 0;
+	if (!args[1] || !_strcmp(args[1], "~"))
+		chdir("/Users/rbougssi");
+	else
+		chdir(args[1]);
+	return (env);
+}
+
+char **
 _env(args, env)
 char **args;
 char **env;
@@ -39,7 +81,7 @@ char **env;
 		args[i + 1] == NULL ? _puts("") : _puts(" ");
 		i++;
 	}
-	allow_options ? _puts("\e[7m%\e[0m") : _puts("\n");
+	(allow_options && args[2]) ? _puts("\e[7m%\e[0m\n") : _puts("\n");
 	return (env);
 }
 
@@ -69,7 +111,6 @@ _exit2(args, env)
 char **args;
 char **env;
 {
-	_puts("EXIT\n");
     return (NULL);
     (void)args;
 	(void)env;
@@ -81,13 +122,13 @@ char **
 	char ** (*builtin_fnc[9])(char **args, char **env);
 
 	builtin_fnc[0] = &_env;
-	// builtin_fnc[1] = &_cd;
+	builtin_fnc[1] = &_cd;
 	builtin_fnc[2] = &_pwd;
-	builtin_fnc[3] = &_echo;
-	// builtin_fnc[4] = &_set;
-	// builtin_fnc[5] = &_unset;
-	builtin_fnc[6] = &_exit2;
-	// builtin_fnc[7] = &_alias;
-	// builtin_fnc[8] = &_dot;
+	builtin_fnc[3] = &_export;
+	builtin_fnc[4] = &_echo;
+	builtin_fnc[5] = &_unset;
+	builtin_fnc[6] = &_dot;
+	builtin_fnc[7] = &_exit2;
+	// builtin_fnc[8] = &_alias;
 	return (builtin_fnc[i]);
 }

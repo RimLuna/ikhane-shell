@@ -6,21 +6,19 @@
 char **
 (*builtin_fnc(int i))(char **args, char **env);
 
-// _alias();
+char	**_cd(char **args, char **env);
 
 char	**_env(char **args, char **env);
-
-// _cd();
 
 char	**_pwd(char **args, char **env);
 
 char	**_echo(char **args, char **env);
 
-// _set();
+char	**_unset(char **args, char **env);
 
-// _unset();
+char	**_export(char **args, char **env);
 
 char	**_exit2(char **args, char **env);
 
-// _dot();
+char	**_dot(char **args, char **env);
 #endif

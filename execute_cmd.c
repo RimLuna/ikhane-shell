@@ -2,14 +2,13 @@
 
 char *builtins[] =
 {
-  "env", "cd", "pwd", "unalias", "echo", "set", "unset", ".", "exit",
+  "env", "cd", "pwd", "export", "echo", "unset", ".", "exit",
   (char *)NULL
 };
 
-int
-is_option(s, c)
+int is_option(s, c)
 char	*s;
-char	c;
+int		c;
 {
 	return (s[0] == '-' && s[1] == c && !s[2]);
 }
@@ -24,10 +23,11 @@ char	**env;
 	if (!args || !*args || !**args)
 		return (0);
 	i = 0;
-	while (i < 9)
+	while (i < 8)
 	{
-		if (_strcmp(args[0], builtins[i++]) == 0)
-			return ((*builtin_fnc(0))(args, env));
+		if (_strcmp(args[0], builtins[i]) == 0)
+			return ((*builtin_fnc(i))(args, env));
+		i++;
 	}
 	return (env);
 	(void)args;

@@ -10,8 +10,9 @@
 
 extern char **environ;
 extern char *builtins[9];
+
 int
-is_option(char *s, char c);
+is_option(char *s, int c);
 
 void
 print_prompt();
