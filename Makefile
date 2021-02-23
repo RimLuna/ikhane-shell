@@ -8,13 +8,13 @@ RM = rm -f
 CC = clang
 CFLAGS = -Wall -Wextra -g
 
-SRCS = shell.c execute_cmd.c buitins.c
+SRCS = shell.c execute_cmd.c builtins.c
 MAIN = main.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)
 	make -C $(LIBD)
-	$(CC) $^ $(MAIN) -o $@ $(LIB)
+	$(CC) $(MAIN) $^ -o $@ $(LIB)
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) -o $@  $<
@@ -27,4 +27,4 @@ fclean:
 	$(RM) $(OBJS) $(NAME)
 	make -C $(LIBD) fclean
 
-re: clean all
+re: fclean all

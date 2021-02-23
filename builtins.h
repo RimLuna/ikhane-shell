@@ -3,28 +3,22 @@
 
 # include <stdlib.h>
 
-char *builtins[] =
-{
-  "alias", "cd", "pwd", "unalias", "echo", "set", "unset", ".", "exit",
-  (char *)NULL
-};
-
 char **
 (*builtin_fnc(int i))(char **args, char **env);
 
-_alias();
+// _alias();
 
-_cd();
+// _cd();
 
-_pwd();
+char	**_pwd(char **args, char **env);
 
-_echo();
+// _echo();
 
-_set();
+// _set();
 
-_unset();
+// _unset();
 
-_exit();
+// _exit();
 
-_dot();
+// _dot();
 #endif

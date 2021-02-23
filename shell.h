@@ -3,10 +3,10 @@
 
 # include "lib/strlib.h"
 # include <unistd.h>
-# include "builtins.h"
 
 # define BUFFER_SIZE 1024
 # define PROMPT "$ "
+# include "builtins.h"
 
 extern char **environ;
 
@@ -16,9 +16,12 @@ print_prompt();
 char *
 _getenv(const char *name);
 
+char **
+execute_cmd(char **args, char **env);
+
 int
 execute_cmds(char **cmd, char **env);
 
 int
-execute_cmd(char **args, char **env);
+ikhane_shell(char **env);
 #endif

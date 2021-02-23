@@ -1,4 +1,10 @@
-#include "shell.c"
+#include "shell.h"
+
+char *builtins[] =
+{
+  "alias", "cd", "pwd", "unalias", "echo", "set", "unset", ".", "exit",
+  (char *)NULL
+};
 
 int
 is_option(s, c)
@@ -8,7 +14,7 @@ char	c;
 	return (s[0] == '-' && s[1] == c && !s[2]);
 }
 
-int
+char **
 execute_cmd(args, env)
 char	**args;
 char	**env;
@@ -20,9 +26,10 @@ char	**env;
 	i = 0;
 	while (i < 9)
 	{
-		if (_strcmp(args[0], builtins[i]) == 0)
-			return (builtin(i, args, env));
+		if (_strcmp(args[0], builtins[i++]) == 0)
+			return ((*builtin_fnc(2))(args, env));
 	}
+	return (env);
 }
 
 int
@@ -38,7 +45,8 @@ char	**env;
 	while (cmd[i])
 	{
 		args = _strtok(cmd[i], " \n\t\r\"");
-		status = execute_cmd(args, env);
+		env = execute_cmd(args, env);
+		status = env ? 1 : 0;
 		free(cmd[i]);
 		i++;
 	}

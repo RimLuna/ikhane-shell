@@ -30,17 +30,12 @@ const char *name;
 }
 
 int
-ikhane_shell(ac, av, envp)
-int		ac;
-char	**av;
-char	**envp;
+ikhane_shell(env)
+char	**env;
 {
 	int		status;
 	char	**cmds;
 	char	*line;
-	char	**env;
-
-  	env = environ;
 
 	status = 1;
 	while (status)
@@ -53,4 +48,5 @@ char	**envp;
 		free(line);
 	}
 	return (status);
+
 }

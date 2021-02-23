@@ -16,7 +16,10 @@ int		ac;
 char	**av;
 char	**envp;
 {
-	return (ikhane_shell(ac, av, envp));
+	char	**env;
+
+	env = environ;
+	return (ikhane_shell(env));
 
 	// env = _getenv("PATH");
 	// _puts(env);
