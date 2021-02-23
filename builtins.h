@@ -18,7 +18,7 @@ char	**_pwd(char **args, char **env);
 
 // _unset();
 
-// _exit();
+char	**_exit2(char **args, char **env);
 
 // _dot();
 #endif

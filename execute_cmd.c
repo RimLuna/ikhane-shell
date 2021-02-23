@@ -27,7 +27,7 @@ char	**env;
 	while (i < 9)
 	{
 		if (_strcmp(args[0], builtins[i++]) == 0)
-			return ((*builtin_fnc(2))(args, env));
+			return ((*builtin_fnc(6))(args, env));
 	}
 	return (env);
 }
@@ -46,7 +46,7 @@ char	**env;
 	{
 		args = _strtok(cmd[i], " \n\t\r\"");
 		env = execute_cmd(args, env);
-		status = env ? 1 : 0;
+		status = !!env;
 		free(cmd[i]);
 		i++;
 	}
