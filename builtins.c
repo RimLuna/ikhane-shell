@@ -14,7 +14,7 @@ char *newdir;
 		// _puts(env[i] + 7);
 		// _puts("\n");
 		if (!_strcmp(env[i] + 7, _getenv("OLDPWD")))
-			_strcpy(env[i] + 7, newdir);
+			env[i] = _strjoin("OLDPWD=", newdir);
 		i++;
 	}
 	return (env);
@@ -34,7 +34,7 @@ char *pwd;
 		// _puts(env[i] + 7);
 		// _puts("\n");
 		if (!_strcmp(env[i] + 4, _getenv("PWD")))
-			_strcpy(env[i] + 4, pwd);
+			env[i] = _strjoin("PWD=", pwd);
 		i++;
 	}
 	return (env);
