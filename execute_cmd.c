@@ -2,7 +2,7 @@
 
 char *builtins[] =
 {
-  "alias", "cd", "pwd", "unalias", "echo", "set", "unset", ".", "exit",
+  "env", "cd", "pwd", "unalias", "echo", "set", "unset", ".", "exit",
   (char *)NULL
 };
 
@@ -27,9 +27,10 @@ char	**env;
 	while (i < 9)
 	{
 		if (_strcmp(args[0], builtins[i++]) == 0)
-			return ((*builtin_fnc(3))(args, env));
+			return ((*builtin_fnc(0))(args, env));
 	}
 	return (env);
+	(void)args;
 }
 
 int

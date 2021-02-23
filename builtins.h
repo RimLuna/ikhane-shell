@@ -8,6 +8,8 @@ char **
 
 // _alias();
 
+char	**_env(char **args, char **env);
+
 // _cd();
 
 char	**_pwd(char **args, char **env);
