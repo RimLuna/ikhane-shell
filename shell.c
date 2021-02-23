@@ -28,3 +28,29 @@ const char *name;
 	}
 	return (NULL);
 }
+
+int
+ikhane_shell(ac, av, envp)
+int		ac;
+char	**av;
+char	**envp;
+{
+	int		status;
+	char	**cmds;
+	char	*line;
+	char	**env;
+
+  	env = environ;
+
+	status = 1;
+	while (status)
+	{
+		print_prompt();
+		line = _readline();
+		cmds = _strtok(line, ";");
+		status = execute_cmds(cmds, env);
+		free(cmds);
+		free(line);
+	}
+	return (status);
+}

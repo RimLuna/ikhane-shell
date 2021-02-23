@@ -8,7 +8,7 @@ RM = rm -f
 CC = clang
 CFLAGS = -Wall -Wextra -g
 
-SRCS = shell.c
+SRCS = shell.c execute_cmd.c buitins.c
 MAIN = main.c
 OBJS = $(SRCS:.c=.o)
 

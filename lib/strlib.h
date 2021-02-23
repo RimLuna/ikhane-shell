@@ -6,6 +6,9 @@
 # include "charlib.h"
 # define BUFFER_SIZE 1024
 
+int
+_strcmp(const char *s1, const char *s2);
+
 char *
 _strnew(size_t size);
 
