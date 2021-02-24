@@ -8,6 +8,11 @@
 # define PROMPT "$ "
 # include "builtins.h"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+
+# define HOME "/Users/rbougssi"
+
 extern char **environ;
 extern char *builtins[9];
 

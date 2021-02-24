@@ -10,7 +10,7 @@ char **env;
 	pwd = _getenv(env, "PWD") ? _getenv(env, "PWD") : _strdup("makaynch PWD");
 	_puts("\e[1m\e[38;5;14m[");
 	_puts("\e[38;5;205m");
-	_puts((!_strcmp(pwd, _getenv(env, "HOME")) ? "~" : pwd));
+	_puts((!_strcmp(pwd, HOME) ? "~" : pwd));
 	_puts("\e[38;5;14m] ");
 	_puts("\e[38;5;226m$ \e[0m");
 	// if (pwd)

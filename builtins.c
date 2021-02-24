@@ -117,14 +117,9 @@ char **env;
 	oldpwd = _getenv(env, "PWD") ? _getenv(env, "PWD") : _getenv(env, "HOME");
 	if (!args[1] || !_strcmp(args[1], "~"))
 	{
-		if ((path = _getenv(env, "HOME")))
-		{
-			env = choldpwd(env, oldpwd);
-			chdir(path);
-			env = chpwd(env, path);
-		}
-		else
-			_puts("cd: HOME not set\n");
+		env = choldpwd(env, oldpwd);
+		chdir(HOME);
+		env = chpwd(env, HOME);
 	}
 	else if (!_strcmp(args[1], "-"))
 	{
