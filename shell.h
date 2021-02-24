@@ -18,7 +18,7 @@ void
 print_prompt();
 
 char *
-_getenv(const char *name);
+_getenv(char **env, const char *name);
 
 char **
 execute_cmd(char **args, char **env);
@@ -28,4 +28,7 @@ execute_cmds(char **cmd, char **env);
 
 int
 ikhane_shell(char **env);
+
+void
+envcpy(char ***env);
 #endif

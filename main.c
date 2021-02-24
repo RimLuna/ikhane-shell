@@ -1,15 +1,26 @@
 #include "shell.h"
 
 void
-print_prompt ()
+envcpy(env)
+char *** env;
 {
-	_puts("\e[1m\e[38;5;14m[");
-	_puts("\e[38;5;205m");
-	_puts("ikhane shell");
-	_puts("\e[38;5;14m] ");
-	_puts("\e[38;5;226m$ \e[0m");
+	int		nenv;
+
+	nenv = -1;
+	while (environ[++nenv])
+		;
+	(*env) = (char **)_memalloc(nenv * sizeof(char *));
+	nenv = -1;
+	while (environ[++nenv])
+		(*env)[nenv] = _strdup(environ[nenv]);
+	(*env)[nenv] = NULL;
 }
 
+/**
+ * @brief  fucking kill me need to allocate env for unset
+ * @note   
+ * @retval 
+ */
 int
 main (ac, av, envp)
 int		ac;
@@ -17,11 +28,19 @@ char	**av;
 char	**envp;
 {
 	char	**env;
+	int		i;
 
-	env = environ;
+	// env = environ;
+	envcpy(&env);
+	// i = -1;
+	// while (env[++i])
+	// {
+	// 	_puts(env[i]);
+	// 	_puts("\n");
+	// }
 	return (ikhane_shell(env));
 
-	// env = _getenv("PATH");
+	// env = _getenv(env, "PATH");
 	// _puts(env);
 	// _puts(envp[0]);
 

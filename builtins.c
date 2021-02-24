@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * @brief  need to set OLDPWD if its been unset
+ * @note   not yet done
+ * @retval 
+ */
 char **
 choldpwd(env, newdir)
 char **env;
@@ -7,16 +12,17 @@ char *newdir;
 {
 	int		i;
 
-	i = 0;
-	// _puts("inside\n");
-	while (env[i])
+	i = -1;
+	if (!_getenv(env, "OLDPWD"))
 	{
-		// _puts(env[i] + 7);
-		// _puts("\n");
-		if (!_strcmp(env[i] + 7, _getenv("OLDPWD")))
-			env[i] = _strjoin("OLDPWD=", newdir);
-		i++;
+		while (env[++i])
+			;
+		env[i] = _strjoin("OLDPWD=", newdir);
+		return (env);
 	}
+	while (env[++i])
+		if (!_strcmp(env[i] + 7, _getenv(env, "OLDPWD")))
+			env[i] = _strjoin("OLDPWD=", newdir);
 	return (env);
 }
 
@@ -27,24 +33,53 @@ char *pwd;
 {
 	int		i;
 
-	i = 0;
-	// _puts("inside\n");
-	while (env[i])
+	i = -1;
+	if (!_getenv(env, "PWD"))
 	{
-		// _puts(env[i] + 7);
-		// _puts("\n");
-		if (!_strcmp(env[i] + 4, _getenv("PWD")))
-			env[i] = _strjoin("PWD=", pwd);
-		i++;
+		while (env[++i])
+			;
+		env[i] = _strjoin("PWD=", pwd);
+		return (env);
 	}
+	while (env[++i])
+		if (!_strcmp(env[i] + 4, _getenv(env, "PWD")))
+			env[i] = _strjoin("PWD=", pwd);
 	return (env);
 }
 
+/**
+ * @brief  stupid unset not yet done
+ * @note   
+ * @retval 
+ */
 char **
 _unset(args, env)
 char **args;
 char **env;
 {
+	int		len;
+	int		i;
+	int		j;
+
+	i = -1;
+	len = args[1] ? _strlen(args[1]) : 0;
+	while (env[++i])
+	{
+		//env[i] + len + 1
+		if (!_strncmp(env[i], args[1], len))
+		{
+			// env[i] = _strdup("");
+			free(env[i]);
+			j = i;
+			while (env[j]  && env[j + 1])
+			{
+				env[j] = env[j + 1];
+				j++;
+			}
+			env[j] = NULL;
+			return (env);			
+		}
+	}
 	return (env);
 	(void)args;
 }
@@ -79,10 +114,12 @@ char **env;
 	i = 0;
 	
 	// ((!_strcmp(args[1], "-")) && (path = _getenv("OLDPWD"))) ? chdir(path) : _puts("cd: OLDPWD not set\n");
-	oldpwd = _getenv("PWD");
+	// _puts(_getenv(env, "PWD"));
+	// _puts("\n");
+	oldpwd = _getenv(env, "PWD") ? _getenv(env, "PWD") : _getenv(env, "HOME");
 	if (!args[1] || !_strcmp(args[1], "~"))
 	{
-		if ((path = _getenv("HOME")))
+		if ((path = _getenv(env, "HOME")))
 		{
 			env = choldpwd(env, oldpwd);
 			chdir(path);
@@ -93,13 +130,11 @@ char **env;
 	}
 	else if (!_strcmp(args[1], "-"))
 	{
-		if ((_strcmp(path = _getenv("OLDPWD"), "")))
+		if ((path = _getenv(env, "OLDPWD")))
 		{
 			chdir(path);
 			env = choldpwd(env, oldpwd);
 			env = chpwd(env, path);
-			_puts(path);
-			_puts("\n");
 		}
 		else
 			_puts("cd: OLDPWD not set\n");

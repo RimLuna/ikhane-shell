@@ -1,7 +1,18 @@
 #include "shell.h"
 
+void
+print_prompt ()
+{
+	_puts("\e[1m\e[38;5;14m[");
+	_puts("\e[38;5;205m");
+	_puts("ikhane shell");
+	_puts("\e[38;5;14m] ");
+	_puts("\e[38;5;226m$ \e[0m");
+}
+
 char *
-_getenv(name)
+_getenv(env, name)
+char **env;
 const char *name;
 {
 	const char	*np;
@@ -16,12 +27,12 @@ const char *name;
 	while (*np && *np != '=')
 		np++;
 	len = np - name;
-	p = environ;
+	p = env;
 	while ((c = *p) != NULL)
 	{
 		if (_strncmp(c, name, len) == 0 && c[len] == '=')
 		{
-			offset = p - environ;
+			offset = p - env;
 			return (c + len + 1);
 		}
 		p++;
