@@ -114,8 +114,6 @@ char **env;
 	i = 0;
 	
 	// ((!_strcmp(args[1], "-")) && (path = _getenv("OLDPWD"))) ? chdir(path) : _puts("cd: OLDPWD not set\n");
-	// _puts(_getenv(env, "PWD"));
-	// _puts("\n");
 	oldpwd = _getenv(env, "PWD") ? _getenv(env, "PWD") : _getenv(env, "HOME");
 	if (!args[1] || !_strcmp(args[1], "~"))
 	{

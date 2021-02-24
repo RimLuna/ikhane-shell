@@ -1,13 +1,21 @@
 #include "shell.h"
 
 void
-print_prompt ()
+print_prompt (env)
+char **env;
 {
+	char		*pwd;
+
+	pwd = NULL;
+	pwd = _getenv(env, "PWD") ? _getenv(env, "PWD") : _strdup("makaynch PWD");
 	_puts("\e[1m\e[38;5;14m[");
 	_puts("\e[38;5;205m");
-	_puts("ikhane shell");
+	_puts((!_strcmp(pwd, _getenv(env, "HOME")) ? "~" : pwd));
 	_puts("\e[38;5;14m] ");
 	_puts("\e[38;5;226m$ \e[0m");
+	// if (pwd)
+	// 	free(pwd);
+	(pwd ? free(pwd) : (void)0);
 }
 
 char *
@@ -33,7 +41,7 @@ const char *name;
 		if (_strncmp(c, name, len) == 0 && c[len] == '=')
 		{
 			offset = p - env;
-			return (c + len + 1);
+			return (_strdup(c + len + 1));
 		}
 		p++;
 	}
@@ -51,7 +59,7 @@ char	**env;
 	status = 1;
 	while (status)
 	{
-		print_prompt();
+		print_prompt(env);
 		line = _readline();
 		cmds = _strtok(line, ";");
 		status = execute_cmds(cmds, env);

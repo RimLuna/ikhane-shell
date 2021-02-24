@@ -15,7 +15,7 @@ int
 is_option(char *s, int c);
 
 void
-print_prompt();
+print_prompt(char **env);
 
 char *
 _getenv(char **env, const char *name);
