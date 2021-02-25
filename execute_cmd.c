@@ -106,9 +106,9 @@ char **env;
 			continue;
 		if ((found = (_getenv(env, dollar)) ? _strdup(_getenv(env, dollar)) : _strdup("")))
 		{
-			
-			printf("%ld\n", dollar - (*args)[i] - 1);
-			(*args)[i] = _strdup(found);
+
+			(*args)[i][dollar - (*args)[i] - 1] = 0;
+			(*args)[i] = _strjoin((*args)[i], _strdup(found));
 		}
 	}
 }
