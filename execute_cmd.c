@@ -77,7 +77,7 @@ char	**env;
 	while (i < 8)
 	{
 		if (_strcmp(args[0], builtins[i]) == 0)
-			return ((*builtin_fnc(i))(args, env));
+			return ((*bf(i))(args, env));
 		i++;
 	}
 	if (stat(args[0], &statbuf) != -1)
@@ -121,13 +121,17 @@ char	**env;
 	char	**args;
 	int		i;
 	int		status;
+	int		nq;
+	int		q;
 
 	i = 0;
 	// if (!_strcmp(cmd[0], ""))
 	// 	return (1);
 	while (cmd[i])
 	{
-		args = _strtok(cmd[i], " \n\t\r\"");
+		// if (!(nq = track_quotes(cmd[i], &q)))
+		// 	return (0);
+		args = _strtok(cmd[i], " \n\t\r\"\'");
 		expand_dollars(&args, env);
 		env = execute_cmd(args, env);
 		status = !!env;

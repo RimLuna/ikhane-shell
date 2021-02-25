@@ -216,18 +216,18 @@ char **env;
 }
 
 char **
-(*builtin_fnc(int i))(char **args, char **env)
+(*bf(int i))(char **args, char **env)
 {
-	char ** (*builtin_fnc[9])(char **args, char **env);
+	char ** (*bf[9])(char **args, char **env);
 
-	builtin_fnc[0] = &_env;
-	builtin_fnc[1] = &_cd;
-	builtin_fnc[2] = &_pwd;
-	builtin_fnc[3] = &_export;
-	builtin_fnc[4] = &_echo;
-	builtin_fnc[5] = &_unset;
-	builtin_fnc[6] = &_dot;
-	builtin_fnc[7] = &_exit2;
-	// builtin_fnc[8] = &_alias;
-	return (builtin_fnc[i]);
+	bf[0] = &_env;
+	bf[1] = &_cd;
+	bf[2] = &_pwd;
+	bf[3] = &_export;
+	bf[4] = &_echo;
+	bf[5] = &_unset;
+	bf[6] = &_dot;
+	bf[7] = &_exit2;
+	// bf[8] = &_alias;
+	return (bf[i]);
 }

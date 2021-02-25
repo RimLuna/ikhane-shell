@@ -4,7 +4,7 @@
 # include <stdlib.h>
 
 char **
-(*builtin_fnc(int i))(char **args, char **env);
+(*bf(int i))(char **args, char **env);
 
 char	**_cd(char **args, char **env);
 
