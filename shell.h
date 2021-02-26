@@ -6,34 +6,37 @@
 
 # define BUFFER_SIZE 1024
 # define PROMPT "$ "
-# include "builtins.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
+# include "builtins.h"
+# include "sigs.h"
+
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define HOME "/Users/rbougssi"
 
-extern char **environ;
-extern char *builtins[9];
+extern char			**environ;
+extern char			*builtins[9];
+extern char			*siglist[NSIG];
 
 int
-is_option(char *s, int c);
+is_option (char *s, int c);
 
 void
-print_prompt(char **env);
+print_prompt (char **env);
 
 char *
-_getenv(char **env, const char *name);
+_getenv (char **env, const char *name);
 
 char **
-execute_cmd(char **args, char **env);
+execute_cmd (char **args, char **env);
 
 int
-execute_cmds(char **cmd, char **env);
+execute_cmds (char **cmd, char **env);
 
 int
-ikhane_shell(char **env);
+ikhane_shell (char **env);
 
 void
-envcpy(char ***env);
+envcpy (char ***env);
 #endif
